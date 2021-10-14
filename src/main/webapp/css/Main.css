@@ -1,0 +1,138 @@
+.site-header {
+    text-align: center;
+    color: crimson;
+    font-style: italic;
+    padding: 10px;
+    background: #1f303b;
+    font-size: 20px;
+}
+
+.logo {
+    width: 20%;
+}
+
+.buttons{
+    font-style: normal;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.buttons a{
+    padding: 16px 16px;
+}
+
+.active{
+    background-color: crimson;
+}
+.buttons li {
+    float: left;
+}
+
+.buttons li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: crimson;
+}
+
+.cinema {
+    width: 500px;
+
+}
+
+p {
+    font-family: Arial, serif;
+    text-indent: 30px;
+}
+
+body {
+    color: #d0d5da;
+    background-color: #16222a;
+}
+
+.promo {
+    border: solid crimson;
+}
+.promo h2{
+    padding-left: 30px;
+    font-size: 35px;
+}
+.cards {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    font-size: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.promoPhoto {
+    margin-top: 5%;
+    height: 100%;
+    width: 100%;
+
+}
+
+.photosText{
+    text-align: center;
+    padding: 10px 20px;
+}
+
+footer {
+    border-style: solid;
+
+    list-style-type: none;
+    text-align: center;
+    color: crimson;
+    padding: 15px;
+    background: #1f303b;
+    font-size: 15px;
+}
+
+.f-text {
+    font-size: 20px;
+    color: aliceblue;
+    height: auto;
+}
+
+.f-text a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.schedule img{
+    margin: 10px;
+    width: 20%;
+}
+
+fieldset {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    text-align: center;
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+fieldset button {
+    font-size: 15px;
+    font-family: "Times New Roman", serif;
+    background-color: crimson;
+    border: none;
+    color: white;
+    padding: 12px 14px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.field {
+
+}
