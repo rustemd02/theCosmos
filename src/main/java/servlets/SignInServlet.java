@@ -30,7 +30,7 @@ public class SignInServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/theCosmos", "postgres", "7872");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/theCosmos", "postgres", "");
 
             UsersRep usersRepository = new UsersRepImpl(connection);
             AuthRepository authRepository = new AuthRepositoryImpl(connection);
@@ -43,7 +43,7 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("html/login.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
     }
 
     @Override
@@ -59,11 +59,12 @@ public class SignInServlet extends HttpServlet {
             response.addCookie(cookie);
             request.setAttribute("name", login);
             request.setAttribute("signIn", "Выйти");
-            request.setAttribute("profileLink", "html/main.html");
+            request.setAttribute("profileLink", "/profile");
             request.setAttribute("register", "Профиль");
-            request.getRequestDispatcher("html/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/profile.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("html/login.jsp").forward(request, response);
+            request.setAttribute("signInStatus", "Неправильный логин или пароль");
+            request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
         }
 
     }
