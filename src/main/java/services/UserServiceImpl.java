@@ -2,6 +2,7 @@ package services;
 
 import form.LogInForm;
 import form.UserForm;
+import models.Auth;
 import models.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +12,7 @@ import repositories.UsersRep;
 import javax.servlet.http.Cookie;
 import java.util.UUID;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private UsersRep usersRepository;
     private AuthRepository authRepository;
     private PasswordEncoder passwordEncoder;
@@ -60,5 +61,15 @@ public class UserServiceImpl implements UserService{
 
         return null;
     }
+
+    @Override
+    public User findUserByCookieValue(String cookieValue) {
+        Auth auth = authRepository.findByCookieValue(cookieValue);
+        if (auth != null) {
+            return auth.getUser();
+        } else {
+            return null;
+        }
     }
+}
 

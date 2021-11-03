@@ -20,9 +20,9 @@ import java.sql.SQLException;
 public class RegistrationServlet extends HttpServlet {
     private UserService usersService;
 
-    private final String DB_URL = "jdbc:postgresql://localhost:5433/theCosmos";
+    private final String DB_URL = "jdbc:postgresql://localhost:5432/theCosmos";
     private final String DB_USERNAME = "postgres";
-    private final String DB_PASSWORD = "7872";
+    private final String DB_PASSWORD = "";
 
     @Override
     public void init() throws ServletException {
@@ -40,7 +40,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("html/register.html").forward(req, resp);
+        req.getRequestDispatcher("jsp/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -52,6 +52,7 @@ public class RegistrationServlet extends HttpServlet {
         userForm.setPassword(req.getParameter("password"));
 
         usersService.register(userForm);
-        req.getRequestDispatcher("html/register.html").forward(req, resp);
+        resp.sendRedirect("/login");
+       // req.getRequestDispatcher("html/register.html").forward(req, resp);
     }
 }

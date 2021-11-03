@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: unterlantas
+  Date: 02.11.2021
+  Time: 13:27
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -10,12 +18,11 @@
 <header class="site-header">
     <img class="logo" src="../Assets/cinema.png" alt="Космос">
     <div class="buttons">
-        <li style="float: left"><a href="/main">Главная</a></li>
-        <li style="float: left"><a class="active" href="/schedule">Афиша</a></li>
-        <li style="align-content: center"><a href="/cosmostar">«Космостар»</a></li>
-        <li style="float: right"><a href="/login">Вход</a></li>
-        <li style="float: right"><a href="/register">Регистрация</a></li>
-
+        <li style="float: left"><a href="${pageContext.request.contextPath}/">Главная</a></li>
+        <li style="float: left"><a class="active" href="${pageContext.request.contextPath}/schedule">Афиша</a></li>
+        <li style="align-content: center"><a href="${pageContext.request.contextPath}/cosmostar">«Космостар»</a></li>
+        <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
+        <li style="float: right"><a href="${profileLink}">${register}</a></li>
 
     </div>
 </header>

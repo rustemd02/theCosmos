@@ -5,7 +5,6 @@ import models.User;
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 public class UsersRepImpl implements UsersRep {
     private Connection connection;
