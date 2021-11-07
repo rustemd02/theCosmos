@@ -12,7 +12,7 @@ public class AuthRepositoryImpl implements AuthRepository{
 
     private Connection connection;
 
-    private final String SQL_FIND_BY_COOKIE_VALUE = "SELECT *, auth.id as auth_id, users.id as user_id FROM auth INNER JOIN users ON auth.user_id=users.id WHERE auth.cookie_value=?";
+    private final String SQL_FIND_BY_COOKIE_VALUE = "SELECT *, auth.id as auth_id, users.id as user_id FROM auth INNER JOIN users ON auth.user_id=users.id WHERE auth.cookie_value = ?";
     private final String SQL_INSERT_AUTH = "INSERT INTO auth (user_id, cookie_value) VALUES (?, ?)";
 
     public AuthRepositoryImpl(Connection connection) {
@@ -51,7 +51,7 @@ public class AuthRepositoryImpl implements AuthRepository{
             preparedStatement.setLong(1, auth.getUser().getId());
             preparedStatement.setString(2, auth.getCookieValue());
             resultSet = preparedStatement.executeQuery();
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
 
         }
         return auth;
@@ -69,7 +69,7 @@ public class AuthRepositoryImpl implements AuthRepository{
             auth.setCookieValue(resultSet.getString("cookie_value"));
 
             User user = new User();
-            user.setId(resultSet.getLong("id"));
+            user.setId(resultSet.getLong("user_id"));
             user.setCosmostarId(resultSet.getLong("cosmostar_id"));
             user.setEmail(resultSet.getString("email"));
             user.setBalance(resultSet.getInt("balance"));

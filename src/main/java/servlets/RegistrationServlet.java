@@ -1,8 +1,8 @@
 package servlets;
 
 import form.UserForm;
-import repositories.UsersRep;
-import repositories.UsersRepImpl;
+import repositories.UsersRepository;
+import repositories.UsersRepositoryImpl;
 import services.UserService;
 import services.UserServiceImpl;
 
@@ -29,7 +29,7 @@ public class RegistrationServlet extends HttpServlet {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            UsersRep usersRepository = new UsersRepImpl(connection);
+            UsersRepository usersRepository = new UsersRepositoryImpl(connection);
             usersService = new UserServiceImpl(usersRepository);
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -40,12 +40,17 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("signIn", "Вход");
+        req.setAttribute("profileLink", "/register");
+        req.setAttribute("register", "Регистрация");
+        req.setAttribute("signOutLink", "/login");
         req.getRequestDispatcher("jsp/register.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+
         UserForm userForm = new UserForm();
         userForm.setEmail(req.getParameter("email"));
         userForm.setName(req.getParameter("name"));
@@ -53,6 +58,5 @@ public class RegistrationServlet extends HttpServlet {
 
         usersService.register(userForm);
         resp.sendRedirect("/login");
-       // req.getRequestDispatcher("html/register.html").forward(req, resp);
     }
 }

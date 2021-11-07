@@ -6,13 +6,13 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-public class UsersRepImpl implements UsersRep {
+public class UsersRepositoryImpl implements UsersRepository {
     private Connection connection;
 
     private final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE email=?";
     private final String SQL_INSERT_USER = "insert into users(name, email, password_hash, balance) VALUES (?, ?, ?, ?)";
 
-    public UsersRepImpl(Connection connection) {
+    public UsersRepositoryImpl(Connection connection) {
         this.connection = connection;
     }
 

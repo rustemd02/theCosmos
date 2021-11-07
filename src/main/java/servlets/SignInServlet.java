@@ -3,8 +3,8 @@ package servlets;
 import form.LogInForm;
 import repositories.AuthRepository;
 import repositories.AuthRepositoryImpl;
-import repositories.UsersRep;
-import repositories.UsersRepImpl;
+import repositories.UsersRepository;
+import repositories.UsersRepositoryImpl;
 import services.UserService;
 import services.UserServiceImpl;
 
@@ -23,6 +23,7 @@ import java.sql.SQLException;
 @WebServlet("/login")
 public class SignInServlet extends HttpServlet {
 
+    private AuthRepository authRepository;
     private UserService usersService;
     private Connection connection;
 
@@ -32,8 +33,8 @@ public class SignInServlet extends HttpServlet {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/theCosmos", "postgres", "");
 
-            UsersRep usersRepository = new UsersRepImpl(connection);
-            AuthRepository authRepository = new AuthRepositoryImpl(connection);
+            UsersRepository usersRepository = new UsersRepositoryImpl(connection);
+            authRepository = new AuthRepositoryImpl(connection);
             usersService = new UserServiceImpl(usersRepository, authRepository);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Unavailable");
@@ -43,6 +44,10 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("signIn", "Вход");
+        request.setAttribute("profileLink", "/register");
+        request.setAttribute("register", "Регистрация");
+        request.setAttribute("signOutLink", "/login");
         request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
     }
 

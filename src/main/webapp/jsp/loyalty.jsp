@@ -16,9 +16,11 @@
 </head>
 <body>
 <header class="site-header">
-    <img class="logo" src="../Assets/cinema.png" alt="Космос">
+    <a href="${pageContext.request.contextPath}/main">
+        <img class="logo" src="../Assets/cinema.png" alt="Космос">
+    </a>
     <div class="buttons">
-        <li style="float: left"><a href="${pageContext.request.contextPath}/">Главная</a></li>
+        <li style="float: left"><a href="${pageContext.request.contextPath}/main">Главная</a></li>
         <li style="float: left"><a href="${pageContext.request.contextPath}/schedule">Афиша</a></li>
         <li style="align-content: center" class="active"><a href="${pageContext.request.contextPath}/cosmostar">«Космостар»</a></li>
         <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
@@ -28,7 +30,9 @@
     </div>
 </header>
 
-<h1>Программа лояльности «Космостар»</h1>
+<h1 style="margin-left: 15px">Программа лояльности «Космостар»</h1>
+
+
 
 <footer>
     <b>Касса:</b>

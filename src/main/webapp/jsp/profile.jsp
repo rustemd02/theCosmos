@@ -16,17 +16,23 @@
 </head>
 <body>
 <header class="site-header">
-    <img class="logo" src="../Assets/cinema.png" alt="Космос">
+    <a href="${pageContext.request.contextPath}/main">
+        <img class="logo" src="../Assets/cinema.png" alt="Космос">
+    </a>
     <div class="buttons">
-        <li style="float: left"><a href="${pageContext.request.contextPath}main">Главная</a></li>
-        <li style="float: left"><a href="${pageContext.request.contextPath}schedule">Афиша</a></li>
-        <li style="align-content: center"><a href="${pageContext.request.contextPath}cosmostar">«Космостар»</a></li>
+        <li style="float: left"><a href="${pageContext.request.contextPath}/main">Главная</a></li>
+        <li style="float: left"><a href="${pageContext.request.contextPath}/schedule">Афиша</a></li>
+        <li style="align-content: center"><a href="${pageContext.request.contextPath}/cosmostar">«Космостар»</a></li>
         <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
         <li style="float: right"><a href="${profileLink}">${register}</a></li>
     </div>
 </header>
 <h1>Добро пожаловать, ${name}</h1>
 
+<h3>Номер Вашей карты лояльности «Космостар»: ${hasCosmostar}</h3>
+<h3>${cosmostarBalance}</h3>
+
+<h3>Баланс Вашей карты MasterCard-4151: ${cardBalance}</h3>
 <footer>
     <b>Касса:</b>
     <li class="f-text"><a href="tel:55-24-73">☎ 55-24-73</a></li>
