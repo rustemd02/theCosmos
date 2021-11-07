@@ -1,10 +1,8 @@
 package servlets;
 
+import models.Cosmostar;
 import models.User;
-import repositories.AuthRepository;
-import repositories.AuthRepositoryImpl;
-import repositories.UsersRep;
-import repositories.UsersRepImpl;
+import repositories.*;
 import services.UserService;
 import services.UserServiceImpl;
 
@@ -33,9 +31,10 @@ public class ProfileServlet extends HttpServlet {
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            UsersRep usersRepository = new UsersRepImpl(connection);
+            UsersRepository usersRepository = new UsersRepositoryImpl(connection);
             AuthRepository authRepository = new AuthRepositoryImpl(connection);
-            userService = new UserServiceImpl(usersRepository, authRepository);
+            CosmostarRepository cosmostarRepository = new CosmostarRepositoryImpl(connection);
+            userService = new UserServiceImpl(usersRepository, authRepository, cosmostarRepository);
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -45,7 +44,7 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie cookies[] = req.getCookies();
+        Cookie[] cookies = req.getCookies();
 
         for (Cookie cookie: cookies) {
             if (cookie.getName().equals("auth")) {
@@ -56,6 +55,15 @@ public class ProfileServlet extends HttpServlet {
                     req.setAttribute("profileLink", "/profile");
                     req.setAttribute("register", "Профиль");
                     req.setAttribute("signOutLink", "");
+
+                    if (user.getCosmostarId() != null) {
+                        req.setAttribute("hasCosmostar", user.getCosmostarId());
+                        req.setAttribute("cosmostarBalance", "Баллов на карте «Космостар»: "+ userService.findCardByUser(user).getPoints());
+                    } else {
+                        req.setAttribute("hasCosmostar" , "у Вас еще нет карты");
+                    }
+
+                    req.setAttribute("cardBalance", user.getBalance());
                     req.getRequestDispatcher("jsp/profile.jsp").forward(req, resp);
                 }
             }

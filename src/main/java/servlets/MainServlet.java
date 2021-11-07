@@ -8,10 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
+@WebServlet("/main")
 public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setHeaderBar(req);
+
+        req.getRequestDispatcher("jsp/main.jsp").forward(req, resp);
+    }
+
+    static void setHeaderBar(HttpServletRequest req) {
+        req.setAttribute("signIn", "Вход");
+        req.setAttribute("profileLink", "/register");
+        req.setAttribute("register", "Регистрация");
+        req.setAttribute("signOutLink", "/login");
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -22,11 +32,7 @@ public class MainServlet extends HttpServlet {
                     req.setAttribute("signOutLink", "");
                 }
             }
-        } else {
-
-        }
-
-        req.getRequestDispatcher("jsp/main.jsp").forward(req, resp);
+        } 
     }
 
     @Override

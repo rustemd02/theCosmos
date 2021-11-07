@@ -1,35 +1,45 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>  </title>
     <link rel="stylesheet" href="../css/Main.css">
+
 </head>
 <body>
 <header class="site-header">
-
     <a href="${pageContext.request.contextPath}/main">
         <img class="logo" src="../Assets/cinema.png" alt="Космос">
     </a>
     <div class="buttons">
         <li style="float: left"><a href="${pageContext.request.contextPath}/main">Главная</a></li>
         <li style="float: left"><a href="${pageContext.request.contextPath}/schedule">Афиша</a></li>
-        <li style="align-content: center"><a href="${pageContext.request.contextPath}/cosmostar">«Космостар»</a></li>
+        <li style="align-content: center" class="active"><a href="${pageContext.request.contextPath}/cosmostar">«Космостар»</a></li>
         <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
         <li style="float: right"><a href="${profileLink}">${register}</a></li>
+
+
     </div>
 </header>
 
-<h1 style="text-align: center">Регистрация</h1>
-<form action="/register" method="post">
-    <label>Имя<input name="name" class="field" type="text" required placeholder="Рустем"></label>
-    <label>E-mail (используется для входа)<input name="email" class="field" type="email" required placeholder="••••@••.ru"></label>
-    <label>Пароль<input name="password" class="field" type="password" required placeholder="•••••••••"></label>
-    <label>Введите пароль еще раз<input name="repassword" class="field" type="password" required placeholder="•••••••••"></label>
-    <button>Создать аккаунт</button>
-</form>
+<h1> ${movieTitle} </h1>
+
+<button id="buyTicket${movie.id}" onclick="buyTicket(${movie.id})">Купить билет</button>
+
+<script>
+    function buyTicket(movieId) {
+        $.ajax({
+            url: '/profile',
+            method: 'post',
+            dataType: 'json',
+            data: {
+                to_bucket: productId
+            },
+            success: bucketSuccess(productId)
+        })
+    }
+</script>
 
 <footer>
     <b>Касса:</b>

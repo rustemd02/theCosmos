@@ -6,19 +6,26 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Афиша</title>
-    <link rel="stylesheet" href="../css/Main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        <%@ include file="../css/Main.css"%>
+    </style>
 
 </head>
 <body>
 <header class="site-header">
-    <img class="logo" src="../Assets/cinema.png" alt="Космос">
+    <a href="${pageContext.request.contextPath}/main">
+        <img class="logo" src="../Assets/cinema.png" alt="Космос">
+    </a>
     <div class="buttons">
-        <li style="float: left"><a href="${pageContext.request.contextPath}/">Главная</a></li>
+        <li style="float: left"><a href="${pageContext.request.contextPath}/main">Главная</a></li>
         <li style="float: left"><a class="active" href="${pageContext.request.contextPath}/schedule">Афиша</a></li>
         <li style="align-content: center"><a href="${pageContext.request.contextPath}/cosmostar">«Космостар»</a></li>
         <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
@@ -29,10 +36,19 @@
 
 <h1 style="margin-left: 15px">Афиша на 6 октября</h1>
 
-<div class="schedule">
-    <a href="">
-        <img src="../../../Assets/dune.jpeg" alt="">
-    </a>
+<div id="schedule">
+    <table>
+        <c:forEach var="movie" items="${movies}">
+        <tr>
+            <td>
+                <c:out value="${movie.poster_link}"/>
+            </td>
+            <td>
+                <c:out value="${movie.title}"/>
+            </td>
+        </tr>
+        </c:forEach>
+    </table>
 
 </div>
 
