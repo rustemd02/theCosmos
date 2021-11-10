@@ -15,6 +15,7 @@ public class MoviesRepositoryImpl implements MoviesRepository{
     private Connection connection;
 
     private final String FIND_ALL = "SELECT * FROM movies;";
+    private final String FIND_BY_ID = "SELECT * FROM movies where movies.id = ?;";
 
 
     public MoviesRepositoryImpl(Connection connection) {
@@ -52,7 +53,17 @@ public class MoviesRepositoryImpl implements MoviesRepository{
 
     @Override
     public Optional<Movie> findById(Long id) {
-        return Optional.empty();
+        ResultSet resultSet = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
+            preparedStatement.setLong(1, id);
+            resultSet = preparedStatement.executeQuery();
+            List<Movie> movies = rowMapProducts.rowMap(resultSet);
+            return movies.stream().findFirst();
+        } catch (SQLException e) {
+
+        }
+        return null;
     }
 
     @Override

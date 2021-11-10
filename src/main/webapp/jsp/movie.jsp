@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>  </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/Main.css">
 
 </head>
@@ -14,8 +16,8 @@
     </a>
     <div class="buttons">
         <li style="float: left"><a href="${pageContext.request.contextPath}/main">Главная</a></li>
-        <li style="float: left"><a href="${pageContext.request.contextPath}/schedule">Афиша</a></li>
-        <li style="align-content: center" class="active"><a href="${pageContext.request.contextPath}/cosmostar">«Космостар»</a></li>
+        <li style="float: left"class="active"><a href="${pageContext.request.contextPath}/schedule">Афиша</a></li>
+        <li style="align-content: center"><a href="${pageContext.request.contextPath}/cosmostar">«Космостар»</a></li>
         <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
         <li style="float: right"><a href="${profileLink}">${register}</a></li>
 
@@ -23,21 +25,68 @@
     </div>
 </header>
 
-<h1> ${movieTitle} </h1>
-
-<button id="buyTicket${movie.id}" onclick="buyTicket(${movie.id})">Купить билет</button>
-
+<h1 style="margin-left: 15px" id="movieTitle">  </h1>
+<div id="button"> </div>
 <script>
-    function buyTicket(movieId) {
+
+    $(document).ready(function () {
+        let movieId = getUrlParameter('id');
+        if (movieId != null) {
+            sendMovieId(movieId)
+        }
+    });
+
+    function buyTicket(id) {
         $.ajax({
-            url: '/profile',
+            url: '/movie',
             method: 'post',
             dataType: 'json',
             data: {
-                to_bucket: productId
+                "buyTicket": id
             },
-            success: bucketSuccess(productId)
+            success: function () {
+                alert("Билет куплен")
+            },
+            error: function () {
+                alert("Ошибка")
+            }
         })
+    }
+
+        function sendMovieId(id) {
+            $.ajax({
+                url: '/movie',           /* Куда пойдет запрос */
+                method: 'post',             /* Метод передачи (post или get) */
+                dataType: 'json',          /* Тип данных в ответе (xml, json, script, html). */
+                data: {
+                    "movie_id": id, /* Параметры передаваемые в запросе. */
+                },
+                success: function (data) {
+                    document.getElementById("movieTitle").innerText = data.title
+                    document.getElementById("button").innerHTML = `<button id="buyTicket" onclick="buyTicket(`+ data.id +`)">Купить билет</button>`
+
+
+                }, error: function () {
+                    document.getElementById("movieTitle").innerText = "Ошибка"
+                }
+            })
+        }
+
+        function getUrlParameter(sParam) {
+            let sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1];
+                }
+            }
+            return false;
+
     }
 </script>
 

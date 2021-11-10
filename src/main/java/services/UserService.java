@@ -3,6 +3,7 @@ package services;
 import form.LogInForm;
 import form.UserForm;
 import models.Cosmostar;
+import models.Seance;
 import models.User;
 
 import javax.servlet.http.Cookie;
@@ -13,4 +14,5 @@ public interface UserService {
     User findUserByCookieValue(String cookieValue);
     Cosmostar findCardByUser (User user);
     Cosmostar cardInit (User user);
+    Seance buyTicket (String seanceId, User user);
 }

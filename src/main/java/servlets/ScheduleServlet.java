@@ -53,11 +53,19 @@ public class ScheduleServlet extends HttpServlet {
         List<Movie> movies = movieService.findAll();
         req.setAttribute("movies", movies);
 
+        if (req.getParameter("id") != null) {
+            req.getRequestDispatcher("jsp/movie.jsp").forward(req, resp);
+            return;
+        }
+
+
         req.getRequestDispatcher("jsp/schedule.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
 
         req.getRequestDispatcher("jsp/schedule.jsp").forward(req, resp);
     }
