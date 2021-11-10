@@ -66,7 +66,7 @@ public class SignInServlet extends HttpServlet {
             request.setAttribute("signIn", "Выйти");
             request.setAttribute("profileLink", "/profile");
             request.setAttribute("register", "Профиль");
-            request.getRequestDispatcher("jsp/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/profile.jsp").forward(request,response);
         } else {
             request.setAttribute("signInStatus", "Неправильный логин или пароль");
             request.getRequestDispatcher("jsp/login.jsp").forward(request, response);

@@ -31,7 +31,7 @@
 </header>
 
 <h1 style="margin-left: 15px">Программа лояльности «Космостар»</h1>
-
+<h2> ${hasCosmostar} </h2>
 
 
 <footer>

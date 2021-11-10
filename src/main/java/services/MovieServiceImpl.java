@@ -4,6 +4,7 @@ import models.Movie;
 import repositories.MoviesRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MovieServiceImpl implements MovieService {
 
@@ -16,5 +17,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Movie> findAll() {
         return moviesRepository.findAll();
+    }
+
+    @Override
+    public Optional<Movie> findById(Long id) {
+        return moviesRepository.findById(id);
     }
 }

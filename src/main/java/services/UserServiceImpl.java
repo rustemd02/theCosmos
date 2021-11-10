@@ -4,6 +4,7 @@ import form.LogInForm;
 import form.UserForm;
 import models.Auth;
 import models.Cosmostar;
+import models.Seance;
 import models.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -93,6 +94,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Cosmostar cardInit(User user) {
        return cosmostarRepository.cardInit(user);
+    }
+
+    @Override
+    public Seance buyTicket(String seanceId, User user) {
+        return null;
     }
 }
 
