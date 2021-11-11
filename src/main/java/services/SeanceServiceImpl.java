@@ -36,6 +36,7 @@ public class SeanceServiceImpl implements SeanceService{
             if (seancePrice < cosmostarBalance) {
                 user.getCosmostar().setPoints(cosmostarBalance - seancePrice);
                 seanceRepository.buyTicket(seanceId, user.getId());
+
                 return seance.get();
             } else {
                 return null;
@@ -44,7 +45,9 @@ public class SeanceServiceImpl implements SeanceService{
             int userBalance = user.getBalance();
             if (seancePrice < userBalance) {
                 user.setBalance(userBalance - seancePrice);
+
                 seanceRepository.buyTicket(seanceId, user.getId());
+                usersRepository.changeBalance(user, user.getBalance());
                 return seance.get();
             } else {
                 return null;
