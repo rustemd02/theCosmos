@@ -66,8 +66,8 @@ public class SeanceRepositoryImpl implements SeanceRepository{
         ResultSet resultSet = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_BUY_TICKET, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setLong(1, seanceId);
-            preparedStatement.setLong(2, userId);
+            preparedStatement.setInt(1, Math.toIntExact(userId));
+            preparedStatement.setInt(2, Math.toIntExact(seanceId));
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException ignored) {
 

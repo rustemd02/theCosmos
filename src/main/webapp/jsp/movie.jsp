@@ -26,12 +26,12 @@
 </header>
 
 <h1 style="margin-left: 15px" id="movieTitle">  </h1>
-<div id="buttonCosmostar"> </div>
-<div id="buttonCard"> </div>
+<div id="buyTicketCosmostar"> </div>
+<div id="buyTicket"> </div>
 <script>
 
     $(document).ready(function () {
-        let seanceId = getUrlParameter('id');
+        let seanceId = getUrlParameter('seance_id');
         if (seanceId != null) {
             sendSeanceId(seanceId)
         }
@@ -71,7 +71,7 @@
         })
     }
 
-        function sendMovieId(id) {
+        function sendSeanceId(id) {
             $.ajax({
                 url: '/movie',           /* Куда пойдет запрос */
                 method: 'post',             /* Метод передачи (post или get) */
@@ -81,9 +81,10 @@
                 },
                 success: function (data) {
                     document.getElementById("movieTitle").innerText = data.title
-                    document.getElementById("button").innerHTML = `<button id="buyTicketCosmostar" onclick="buyTicketCosmostar(`+ data.id +`)">Купить билет за баллы Космостар</button>`
-                    document.getElementById("button").innerHTML = `<button id="buyTicketCard" onclick="buyTicket(`+ data.id +`)">Купить билет</button>`
+                    document.getElementById("buyTicketCosmostar").innerHTML = `<button id="buyTicketCosmostar" onclick="buyTicketCosmostar(`+ data.id +`)">Купить билет за баллы Космостар</button>`
+                    document.getElementById("buyTicket").innerHTML = `<button id="buyTicket" onclick="buyTicket(`+ data.id +`)">Купить билет</button>`
                 }, error: function () {
+                    alert("DD")
                     document.getElementById("movieTitle").innerText = "Ошибка"
                 }
             })

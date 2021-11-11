@@ -34,7 +34,7 @@
     </div>
 </header>
 
-<h1 style="margin-left: 15px">Афиша на 6 октября</h1>
+<h1 style="margin-left: 15px">Афиша на 11 ноября</h1>
 
 <div id="schedule">
     <table>
@@ -45,8 +45,8 @@
                 <c:out value="${seance.movie.poster_link}"/>
             </td>
             <td>
-                <form class="movie" method="get" action="${pageContext.request.contextPath}/schedule">
-                    <button name="id" value="${seance.id}"> <c:out value="${seance.movie.title}"/> </button>
+                <form class="seance" method="get" action="${pageContext.request.contextPath}/schedule">
+                    <button name="seance_id" value="${seance.id}"> <c:out value="${seance.movie.title}"/> </button>
                 </form>
             </td>
         </tr>
@@ -55,49 +55,47 @@
 
 </div>
 
-<script>
+<%--<script>--%>
 
-    $(document).ready(function () {
-        let seanceId = getUrlParameter('id');
-        if (seanceId != null) {
-            sendSeanceId(seanceId)
-        }
-    });
+<%--    $(document).ready(function () {--%>
+<%--        let seanceId = getUrlParameter('id');--%>
+<%--        if (seanceId != null) {--%>
+<%--            sendSeanceId(seanceId)--%>
+<%--        }--%>
+<%--    });--%>
 
-    function sendSeanceId(id) {
-        $.ajax({
-            url: '/movie',           /* Куда пойдет запрос */
-            method: 'post',             /* Метод передачи (post или get) */
-            dataType: 'json',          /* Тип данных в ответе (xml, json, script, html). */
-            data: {
-                "seance_id": id, /* Параметры передаваемые в запросе. */
-            },
-            success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
-                alert(data);
-                document.getElementById('movieTitle').innerText = "fff"
-                document.querySelector('#movieTitle').innerText = "fff"
+<%--    function sendSeanceId(id) {--%>
+<%--        $.ajax({--%>
+<%--            url: '/movie',           /* Куда пойдет запрос */--%>
+<%--            method: 'post',             /* Метод передачи (post или get) */--%>
+<%--            dataType: 'json',          /* Тип данных в ответе (xml, json, script, html). */--%>
+<%--            data: {--%>
+<%--                "seance_id": id, /* Параметры передаваемые в запросе. */--%>
+<%--            },--%>
+<%--            success: function () {   /* функция которая будет выполнена после успешного запроса.  */--%>
 
-            }
-        })
-    }
+<%--            }, error: function () {--%>
+<%--            }--%>
+<%--        })--%>
+<%--    }--%>
 
-    function getUrlParameter(sParam) {
-        let sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
+<%--    function getUrlParameter(sParam) {--%>
+<%--        let sPageURL = window.location.search.substring(1),--%>
+<%--            sURLVariables = sPageURL.split('&'),--%>
+<%--            sParameterName,--%>
+<%--            i;--%>
 
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
+<%--        for (i = 0; i < sURLVariables.length; i++) {--%>
+<%--            sParameterName = sURLVariables[i].split('=');--%>
 
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1];
-            }
-        }
-        return false;
+<%--            if (sParameterName[0] === sParam) {--%>
+<%--                return sParameterName[1];--%>
+<%--            }--%>
+<%--        }--%>
+<%--        return false;--%>
 
-    }
-</script>
+<%--    }--%>
+<%--</script>--%>
 
 
 

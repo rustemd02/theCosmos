@@ -15,7 +15,8 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     private final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE email=?";
     private final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
-    private final String SQL_INSERT_USER = "insert into users(name, email, password_hash, balance) VALUES (?, ?, ?, ?)";
+    private final String SQL_INSERT_USER = "insert into users(name, email, password_hash, cosmostar_id, balance) VALUES (?, ?, ?, ?, ?)";
+    private final String SQL_CHANGE_BALANCE = "update users set balance = ? where id = ?;";
 
     public UsersRepositoryImpl(Connection connection) {
         this.connection = connection;
@@ -50,7 +51,8 @@ public class UsersRepositoryImpl implements UsersRepository {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPasswordHash());
-            preparedStatement.setInt(4, 1000);
+            preparedStatement.setInt(4, 5225398);
+            preparedStatement.setInt(5, 1000);
 
 
             System.out.println(preparedStatement);
@@ -82,6 +84,22 @@ public class UsersRepositoryImpl implements UsersRepository {
             resultSet = preparedStatement.executeQuery();
             List<User> users = rowMapUsers.rowMap(resultSet);
             return users.get(0);
+        } catch (SQLException throwables) {
+            //
+        }
+        return null;
+    }
+
+    @Override
+    public User changeBalance(User user, int newBalance) {
+        ResultSet resultSet = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_CHANGE_BALANCE);
+            preparedStatement.setInt(1, newBalance);
+            preparedStatement.setInt(2, Math.toIntExact(user.getId()));
+            resultSet = preparedStatement.executeQuery();
+
+            return user;
         } catch (SQLException throwables) {
             //
         }

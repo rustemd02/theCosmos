@@ -42,6 +42,8 @@ public class MovieServlet extends HttpServlet {
             SeanceRepository seanceRepository = new SeanceRepositoryImpl(connection);
             UsersRepository usersRepository = new UsersRepositoryImpl(connection);
             seanceService = new SeanceServiceImpl(seanceRepository, usersRepository);
+            AuthRepository authRepository = new AuthRepositoryImpl(connection);
+            userService = new UserServiceImpl(usersRepository, authRepository);
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Unavailable");
             throw new UnavailableException("Сайт недоступен!!!");
@@ -70,6 +72,7 @@ public class MovieServlet extends HttpServlet {
             System.out.println(json);
             resp.getWriter().println(json);
         }
+
         String buyTicket = req.getParameter("buyTicket");
         String buyTicketCosmostar = req.getParameter("buyTicketCosmostar");
         if ((buyTicket != null) || (buyTicketCosmostar != null)) {

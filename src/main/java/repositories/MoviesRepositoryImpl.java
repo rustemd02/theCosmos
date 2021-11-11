@@ -17,7 +17,7 @@ public class MoviesRepositoryImpl implements MoviesRepository{
 
     private final String SQL_FIND_ALL = "SELECT * FROM movies;";
     private final String SQL_FIND_BY_ID = "SELECT * FROM movies where movies.id = ?;";
-    private final String SQL_FIND_MOVIE_BY_SEANCE_ID = "SELECT * FROM seance where id = ?;";
+    private final String SQL_FIND_MOVIE_BY_SEANCE_ID = "SELECT movie_id FROM seance where id = ?;";
 
 
     public MoviesRepositoryImpl(Connection connection) {
@@ -76,10 +76,9 @@ public class MoviesRepositoryImpl implements MoviesRepository{
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_MOVIE_BY_SEANCE_ID);
             preparedStatement.setInt(1, Math.toIntExact(seanceId));
             resultSet = preparedStatement.executeQuery();
-            int id = resultSet.getInt("movie_id");
-            System.out.println(Math.toIntExact(seanceId));
-            System.out.println(id);
-            Optional<Movie> movie = findById((long) id);
+            resultSet.next();
+            long id = resultSet.getInt("movie_id");
+            Optional<Movie> movie = findById(id);
             return movie;
         } catch (SQLException e) {
 
