@@ -1,12 +1,28 @@
 package models;
 
+import java.util.Objects;
+
 public class User {
     private Long id;
-    private Long cosmostarId;
+    private Cosmostar cosmostar;
     private String email;
     private String passwordHash;
     private String name;
     private int balance;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return balance == user.balance && Objects.equals(id, user.id) && Objects.equals(cosmostar, user.cosmostar) && Objects.equals(email, user.email) && Objects.equals(passwordHash, user.passwordHash) && Objects.equals(name, user.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cosmostar, email, passwordHash, name, balance);
+    }
 
     public Long getId() {
         return id;
@@ -16,12 +32,12 @@ public class User {
         this.id = id;
     }
 
-    public Long getCosmostarId() {
-        return cosmostarId;
+    public Cosmostar getCosmostar() {
+        return cosmostar;
     }
 
-    public void setCosmostarId(Long cosmostarId) {
-        this.cosmostarId = cosmostarId;
+    public void setCosmostar(Cosmostar cosmostar) {
+        this.cosmostar = cosmostar;
     }
 
     public String getEmail() {

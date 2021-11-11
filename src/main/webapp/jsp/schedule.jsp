@@ -39,14 +39,14 @@
 <div id="schedule">
     <table>
 
-        <c:forEach var="movie" items="${movies}">
+        <c:forEach var="seance" items="${seances}">
         <tr>
             <td>
-                <c:out value="${movie.poster_link}"/>
+                <c:out value="${seance.movie.poster_link}"/>
             </td>
             <td>
                 <form class="movie" method="get" action="${pageContext.request.contextPath}/schedule">
-                    <button name="id" value="${movie.id}"> <c:out value="${movie.title}"/> </button>
+                    <button name="id" value="${seance.id}"> <c:out value="${seance.movie.title}"/> </button>
                 </form>
             </td>
         </tr>
@@ -58,19 +58,19 @@
 <script>
 
     $(document).ready(function () {
-        let movieId = getUrlParameter('id');
-        if (movieId != null) {
-            sendMovieId(movieId)
+        let seanceId = getUrlParameter('id');
+        if (seanceId != null) {
+            sendSeanceId(seanceId)
         }
     });
 
-    function sendMovieId(id) {
+    function sendSeanceId(id) {
         $.ajax({
             url: '/movie',           /* Куда пойдет запрос */
             method: 'post',             /* Метод передачи (post или get) */
             dataType: 'json',          /* Тип данных в ответе (xml, json, script, html). */
             data: {
-                "id": id, /* Параметры передаваемые в запросе. */
+                "seance_id": id, /* Параметры передаваемые в запросе. */
             },
             success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
                 alert(data);

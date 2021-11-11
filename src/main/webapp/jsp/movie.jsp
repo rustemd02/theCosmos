@@ -26,13 +26,14 @@
 </header>
 
 <h1 style="margin-left: 15px" id="movieTitle">  </h1>
-<div id="button"> </div>
+<div id="buttonCosmostar"> </div>
+<div id="buttonCard"> </div>
 <script>
 
     $(document).ready(function () {
-        let movieId = getUrlParameter('id');
-        if (movieId != null) {
-            sendMovieId(movieId)
+        let seanceId = getUrlParameter('id');
+        if (seanceId != null) {
+            sendSeanceId(seanceId)
         }
     });
 
@@ -53,19 +54,35 @@
         })
     }
 
+    function buyTicketCosmostar(id) {
+        $.ajax({
+            url: '/movie',
+            method: 'post',
+            dataType: 'json',
+            data: {
+                "buyTicketCosmostar": id
+            },
+            success: function () {
+                alert("Билет куплен")
+            },
+            error: function () {
+                alert("Ошибка")
+            }
+        })
+    }
+
         function sendMovieId(id) {
             $.ajax({
                 url: '/movie',           /* Куда пойдет запрос */
                 method: 'post',             /* Метод передачи (post или get) */
                 dataType: 'json',          /* Тип данных в ответе (xml, json, script, html). */
                 data: {
-                    "movie_id": id, /* Параметры передаваемые в запросе. */
+                    "seance_id": id, /* Параметры передаваемые в запросе. */
                 },
                 success: function (data) {
                     document.getElementById("movieTitle").innerText = data.title
-                    document.getElementById("button").innerHTML = `<button id="buyTicket" onclick="buyTicket(`+ data.id +`)">Купить билет</button>`
-
-
+                    document.getElementById("button").innerHTML = `<button id="buyTicketCosmostar" onclick="buyTicketCosmostar(`+ data.id +`)">Купить билет за баллы Космостар</button>`
+                    document.getElementById("button").innerHTML = `<button id="buyTicketCard" onclick="buyTicket(`+ data.id +`)">Купить билет</button>`
                 }, error: function () {
                     document.getElementById("movieTitle").innerText = "Ошибка"
                 }

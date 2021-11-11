@@ -2,6 +2,7 @@ package repositories;
 
 import mapper.RowMapper;
 import models.Auth;
+import models.Cosmostar;
 import models.User;
 
 import java.sql.*;
@@ -68,9 +69,12 @@ public class AuthRepositoryImpl implements AuthRepository{
             auth.setId(resultSet.getLong("auth_id"));
             auth.setCookieValue(resultSet.getString("cookie_value"));
 
+            CosmostarRepositoryImpl cosmostarRepository = new CosmostarRepositoryImpl(connection);
+            Cosmostar cosmostar = cosmostarRepository.findCardById(resultSet.getLong("cosmostar_id"));
+
             User user = new User();
             user.setId(resultSet.getLong("user_id"));
-            user.setCosmostarId(resultSet.getLong("cosmostar_id"));
+            user.setCosmostar(cosmostar);
             user.setEmail(resultSet.getString("email"));
             user.setBalance(resultSet.getInt("balance"));
             user.setName(resultSet.getString("name"));

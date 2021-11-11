@@ -1,6 +1,7 @@
 package services;
 
 import models.Movie;
+import models.Seance;
 import repositories.MoviesRepository;
 
 import java.util.List;
@@ -23,4 +24,11 @@ public class MovieServiceImpl implements MovieService {
     public Optional<Movie> findById(Long id) {
         return moviesRepository.findById(id);
     }
+
+    @Override
+    public Optional<Movie> findMovieBySeanceId(Long seanceId) {
+        return moviesRepository.findMovieBySeanceId(seanceId);
+    }
+
+
 }
