@@ -2,11 +2,9 @@ package servlets;
 
 
 import models.Movie;
-import repositories.MoviesRepository;
-import repositories.MoviesRepositoryImpl;
-import services.MovieService;
-import services.MovieServiceImpl;
-import services.UserService;
+import models.Seance;
+import repositories.*;
+import services.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
@@ -25,6 +23,7 @@ import java.util.List;
 public class ScheduleServlet extends HttpServlet {
 
     private MovieService movieService;
+    private SeanceService seanceService;
     private UserService userService;
 
     private final String URL = "jdbc:postgresql://localhost:5432/theCosmos";
@@ -39,6 +38,10 @@ public class ScheduleServlet extends HttpServlet {
 
             MoviesRepository moviesRepository = new MoviesRepositoryImpl(connection);
             movieService = new MovieServiceImpl(moviesRepository);
+            SeanceRepository seanceRepository = new SeanceRepositoryImpl(connection);
+            UsersRepository usersRepository = new UsersRepositoryImpl(connection);
+            seanceService = new SeanceServiceImpl(seanceRepository, usersRepository);
+
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Unavailable");
             throw new UnavailableException("Сайт недоступен!!!");
@@ -50,10 +53,10 @@ public class ScheduleServlet extends HttpServlet {
         MainServlet.setHeaderBar(req);
         req.setCharacterEncoding("UTF-8");
 
-        List<Movie> movies = movieService.findAll();
-        req.setAttribute("movies", movies);
+        List<Seance> seances = seanceService.findAll();
+        req.setAttribute("seances", seances);
 
-        if (req.getParameter("id") != null) {
+        if (req.getParameter("seance_id") != null) {
             req.getRequestDispatcher("jsp/movie.jsp").forward(req, resp);
             return;
         }
@@ -64,8 +67,6 @@ public class ScheduleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
 
         req.getRequestDispatcher("jsp/schedule.jsp").forward(req, resp);
     }

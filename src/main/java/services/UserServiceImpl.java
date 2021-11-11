@@ -8,9 +8,7 @@ import models.Seance;
 import models.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import repositories.AuthRepository;
-import repositories.CosmostarRepository;
-import repositories.UsersRepository;
+import repositories.*;
 
 import javax.servlet.http.Cookie;
 import java.util.UUID;
@@ -21,10 +19,12 @@ public class UserServiceImpl implements UserService {
     private CosmostarRepository cosmostarRepository;
     private PasswordEncoder passwordEncoder;
 
+
     public UserServiceImpl(UsersRepository usersRepository, AuthRepository authRepository, CosmostarRepository cosmostarRepository) {
         this.usersRepository = usersRepository;
         this.authRepository = authRepository;
         this.cosmostarRepository = cosmostarRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public UserServiceImpl(UsersRepository usersRepository, AuthRepository authRepository) {
@@ -96,9 +96,5 @@ public class UserServiceImpl implements UserService {
        return cosmostarRepository.cardInit(user);
     }
 
-    @Override
-    public Seance buyTicket(String seanceId, User user) {
-        return null;
-    }
 }
 

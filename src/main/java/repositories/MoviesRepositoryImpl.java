@@ -2,6 +2,7 @@ package repositories;
 
 import mapper.RowMapper;
 import models.Movie;
+import models.Seance;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +15,9 @@ import java.util.Optional;
 public class MoviesRepositoryImpl implements MoviesRepository{
     private Connection connection;
 
-    private final String FIND_ALL = "SELECT * FROM movies;";
-    private final String FIND_BY_ID = "SELECT * FROM movies where movies.id = ?;";
+    private final String SQL_FIND_ALL = "SELECT * FROM movies;";
+    private final String SQL_FIND_BY_ID = "SELECT * FROM movies where movies.id = ?;";
+    private final String SQL_FIND_MOVIE_BY_SEANCE_ID = "SELECT * FROM seance where id = ?;";
 
 
     public MoviesRepositoryImpl(Connection connection) {
@@ -26,9 +28,9 @@ public class MoviesRepositoryImpl implements MoviesRepository{
     public List<Movie> findAll() {
         ResultSet resultSet = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_ALL);
             resultSet = preparedStatement.executeQuery();
-            List<Movie> movies = rowMapProducts.rowMap(resultSet);
+            List<Movie> movies = rowMapMovies.rowMap(resultSet);
             return movies;
         } catch (SQLException e) {
 
@@ -36,7 +38,7 @@ public class MoviesRepositoryImpl implements MoviesRepository{
         return null;
     }
 
-    private RowMapper<List<Movie>> rowMapProducts = ((resultSet) -> {
+    private RowMapper<List<Movie>> rowMapMovies = ((resultSet) -> {
         List<Movie> movies = new ArrayList<>();
         while (resultSet.next()) {
             Movie movie = new Movie();
@@ -51,20 +53,41 @@ public class MoviesRepositoryImpl implements MoviesRepository{
         return movies;
     });
 
+
     @Override
     public Optional<Movie> findById(Long id) {
         ResultSet resultSet = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID);
             preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
-            List<Movie> movies = rowMapProducts.rowMap(resultSet);
+            List<Movie> movies = rowMapMovies.rowMap(resultSet);
             return movies.stream().findFirst();
         } catch (SQLException e) {
 
         }
         return null;
     }
+
+    @Override
+    public Optional<Movie> findMovieBySeanceId(Long seanceId){
+        ResultSet resultSet = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_MOVIE_BY_SEANCE_ID);
+            preparedStatement.setInt(1, Math.toIntExact(seanceId));
+            resultSet = preparedStatement.executeQuery();
+            int id = resultSet.getInt("movie_id");
+            System.out.println(Math.toIntExact(seanceId));
+            System.out.println(id);
+            Optional<Movie> movie = findById((long) id);
+            return movie;
+        } catch (SQLException e) {
+
+        }
+        return null;
+    }
+
+
 
     @Override
     public Movie save(Movie movie) {

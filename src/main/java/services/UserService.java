@@ -14,5 +14,4 @@ public interface UserService {
     User findUserByCookieValue(String cookieValue);
     Cosmostar findCardByUser (User user);
     Cosmostar cardInit (User user);
-    Seance buyTicket (String seanceId, User user);
 }

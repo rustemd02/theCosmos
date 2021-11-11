@@ -1,17 +1,25 @@
 package models;
 
+import java.util.Objects;
+
 public class Cosmostar {
     private long id;
     private int points;
-    private long user_id;
 
-    public long getUser_id() {
-        return user_id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cosmostar cosmostar = (Cosmostar) o;
+        return id == cosmostar.id && points == cosmostar.points;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, points);
     }
+
 
     public Long getId() {
         return id;

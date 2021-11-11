@@ -56,8 +56,8 @@ public class ProfileServlet extends HttpServlet {
                     req.setAttribute("register", "Профиль");
                     req.setAttribute("signOutLink", "");
 
-                    if (user.getCosmostarId() != null) {
-                        req.setAttribute("hasCosmostar", user.getCosmostarId());
+                    if (user.getCosmostar() != null) {
+                        req.setAttribute("hasCosmostar", user.getCosmostar().getId());
                         req.setAttribute("cosmostarBalance", "Баллов на карте «Космостар»: "+ userService.findCardByUser(user).getPoints());
                     } else {
                         req.setAttribute("hasCosmostar" , "у Вас еще нет карты");
