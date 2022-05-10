@@ -26,7 +26,7 @@ public class CosmostarController {
             modelAndView.setViewName("redirect:/" + redirect);
             return modelAndView;
         }
-        modelAndView.setViewName("cosmostar");
+        modelAndView.setViewName("loyalty");
         modelAndView.addObject("signIn", "Выйти");
         modelAndView.addObject("profileLink", "/profile");
         modelAndView.addObject("register", "Профиль");
