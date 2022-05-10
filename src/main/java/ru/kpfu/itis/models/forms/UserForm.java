@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UserForm {
-    private String username;
+    private String name;
     private String email;
     private String password;
 
     @Override
     public String toString() {
         return "UserForm{" +
-                "username='" + username + '\'' +
+                "username='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

@@ -24,12 +24,9 @@ public class UsersController {
     private UserService usersService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/login")
-    private ModelAndView loginPage(String redirect) {
+    public ModelAndView loginPage() {
         ModelAndView modelAndView = new ModelAndView();
-        if (redirect != null) {
-            modelAndView.setViewName("redirect:/" + redirect);
-            return modelAndView;
-        }
+
         modelAndView.setViewName("login");
 
         modelAndView.addObject("signIn", "Вход");
@@ -42,7 +39,7 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    private ModelAndView authorise(AuthDto authDto, HttpServletResponse response) {
+    public ModelAndView authorise(AuthDto authDto, HttpServletResponse response) {
         AuthForm authForm = AuthForm.builder()
                 .email(authDto.getEmail())
                 .password(authDto.getPassword())
@@ -66,12 +63,9 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/register")
-    private ModelAndView signUpPage(String redirect) {
+    public ModelAndView signUpPage() {
         ModelAndView modelAndView = new ModelAndView();
-        if (redirect != null) {
-            modelAndView.setViewName("redirect:/" + redirect);
-            return modelAndView;
-        }
+
         modelAndView.setViewName("register");
 
         modelAndView.addObject("signIn", "Вход");
@@ -84,7 +78,7 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/register")
-    private ModelAndView signUp(SignUpDto signUpDto, HttpServletResponse response) {
+    public ModelAndView signUp(SignUpDto signUpDto, HttpServletResponse response) {
 
         ModelAndView modelAndView = new ModelAndView();
         System.out.println(signUpDto.toString());
@@ -110,7 +104,7 @@ public class UsersController {
         if (password.equals(repassword)) {
 
             UserForm userForm = new UserForm();
-            userForm.setUsername(name);
+            userForm.setName(name);
             userForm.setEmail(email);
             userForm.setPassword(password);
 
@@ -140,7 +134,7 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/profile")
-    private ModelAndView profilePage(Authentication authentication, String redirect) {
+    public ModelAndView profilePage(Authentication authentication, String redirect) {
         ModelAndView modelAndView = new ModelAndView();
         if (redirect != null) {
             modelAndView.setViewName("redirect:/" + redirect);

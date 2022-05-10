@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class MessageDto {
     private String messageType;
-    private String username;
+    private String name;
     private String body;
 }

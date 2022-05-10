@@ -18,6 +18,8 @@
         <li style="align-content: center"><a href="/cosmostar">«Космостар»</a></li>
         <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
         <li style="float: right"><a href="${profileLink}">${register}</a></li>
+        <li style="float: right"><a href="/movieChat">Чат</a></li>
+
     </div>
 </header>
 
