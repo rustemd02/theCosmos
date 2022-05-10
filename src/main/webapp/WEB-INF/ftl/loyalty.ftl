@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Афиша</title>
+    <title>Космостар</title>
     <link rel="stylesheet" href="../../resources/css/Main.css">
 
 </head>
@@ -18,13 +18,20 @@
         <li style="align-content: center" class="active"><a href="/cosmostar">«Космостар»</a></li>
         <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
         <li style="float: right"><a href="${profileLink}">${register}</a></li>
+        <li style="float: right"><a href="/movieChat">Чат</a></li>
+
 
 
     </div>
 </header>
 
 <h1 style="margin-left: 15px">Программа лояльности «Космостар»</h1>
-<h2> ${hasCosmostar} </h2>
+<h3>Номер Вашей карты лояльности «Космостар»: ${hasCosmostar}</h3>
+<h3>${cosmostarBalance}</h3>
+
+<button type="button">Выпустить карту</button>
+
+
 
 
 <footer>

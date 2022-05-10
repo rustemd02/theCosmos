@@ -6,7 +6,7 @@ function connect(id) {
     webSocket.onmessage = function receiveMessage(response) {
         let data = response['data'];
         let json = JSON.parse(data);
-        $('#messagesList').last().before("<p style='font-size: larger; height: 3%'>" + json['username'] + ": " + json['body'] + "</p>")
+        $('#messagesList').last().before("<p style='font-size: larger; height: 3%'>" + json['name'] + ": " + json['body'] + "</p>")
         let scrollView = document.getElementById('chatScrollView')
         scrollView.scrollTop = scrollView.scrollHeight;
     };
@@ -18,7 +18,7 @@ function connect(id) {
 function enterChat(from) {
     let message = {
         "messageType": "enterChat",
-        "username": from,
+        "name": from,
         "body": ""
     };
     webSocket.send(JSON.stringify(message));
@@ -33,7 +33,7 @@ function sendMessage(from, text) {
 
     let message = {
         "messageType": "chat",
-        "username": from,
+        "name": from,
         "body": text
     };
     webSocket.send(JSON.stringify(message));

@@ -21,6 +21,8 @@
         <li style="align-content: center"><a href="/cosmostar">«Космостар»</a></li>
         <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
         <li style="float: right"><a href="${profileLink}">${register}</a></li>
+        <li style="float: right"><a href="/movieChat">Чат</a></li>
+
 
     </div>
 </header>
@@ -29,7 +31,11 @@
 
 <div id="schedule">
     <table>
-
+        <#list seances as seance>
+            <form class="menu-option" method="post" action="/movie">
+                <h3><button type="submit" name="seance" value="${seance.getId()}">${seance.movie.getTitle()}</button></h3>
+            </form>
+        </#list>
     </table>
 
 </div>

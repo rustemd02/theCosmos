@@ -35,7 +35,7 @@ public class MessagesWebSocketHandler extends TextWebSocketHandler {
         User user;
         switch (messageDto.getMessageType()) {
             case "enterChat":
-                sessions.put(messageDto.getUsername(), session);
+                sessions.put(messageDto.getName(), session);
                 messageDto.setMessageType("chat");
                 messageDto.setBody("вошёл в чат...");
                 for (WebSocketSession currentSession : sessions.values()) {

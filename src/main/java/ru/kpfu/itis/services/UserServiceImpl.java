@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(UserForm userForm) {
         User user = new User();
-        user.setName(userForm.getUsername());
+        user.setName(userForm.getName());
         user.setEmail(userForm.getEmail());
         user.setPasswordHash(userForm.getPassword());
         user.setBalance(500);

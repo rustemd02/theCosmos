@@ -24,7 +24,7 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         SignUpDto signUpDto = (SignUpDto) obj;
-        ValidationUtils.rejectIfEmpty(errors, "username", "username", "Не указано Имя");
+        ValidationUtils.rejectIfEmpty(errors, "name", "name", "Не указано Имя");
         ValidationUtils.rejectIfEmpty(errors, "email", "email", "Не указан Логин");
         ValidationUtils.rejectIfEmpty(errors, "password", "password", "Не указан Пароль");
         ValidationUtils.rejectIfEmpty(errors, "consent", "consent", "Не указано Согласие");
