@@ -26,10 +26,10 @@
 </header>
 
 <h1 style="margin-left: 15px">Программа лояльности «Космостар»</h1>
-<h3>Номер Вашей карты лояльности «Космостар»: ${hasCosmostar}</h3>
-<h3>${cosmostarBalance}</h3>
+<#--<h3>Номер Вашей карты лояльности «Космостар»: ${hasCosmostar}</h3>-->
+<#--<h3>${cosmostarBalance}</h3>-->
 
-<button type="button">Выпустить карту</button>
+<#--<button type="button">Выпустить карту</button>-->
 
 
 
