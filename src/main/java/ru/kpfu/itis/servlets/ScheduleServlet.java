@@ -54,7 +54,7 @@
 //        req.setAttribute("seances", seances);
 //
 //        if (req.getParameter("seance_id") != null) {
-//            req.getRequestDispatcher("jsp/movie.ftl").forward(req, resp);
+//            req.getRequestDispatcher("jsp/seance.ftl").forward(req, resp);
 //            return;
 //        }
 //

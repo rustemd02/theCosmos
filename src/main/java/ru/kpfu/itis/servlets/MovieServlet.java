@@ -54,7 +54,7 @@
 //        MainServlet.setHeaderBar(req);
 //
 //
-//        req.getRequestDispatcher("jsp/movie.ftl").forward(req, resp);
+//        req.getRequestDispatcher("jsp/seance.ftl").forward(req, resp);
 //    }
 //
 //    @Override
@@ -88,7 +88,7 @@
 //            }
 //        }
 //
-//        // req.getRequestDispatcher("jsp/movie.ftl").forward(req, resp);
+//        // req.getRequestDispatcher("jsp/seance.ftl").forward(req, resp);
 //    }
 //
 //    private User findUser(HttpServletRequest request) {

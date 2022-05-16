@@ -45,33 +45,6 @@ public class UserServiceImpl implements UserService {
         return usersRepository.save(user);
     }
 
-    @Override
-    public Cookie signIn(AuthForm authForm) {
-
-        User user = null;
-        Optional<User> optional = usersRepository.findByEmail(authForm.getEmail());
-        if (optional.isPresent()) user = optional.get();
-
-        System.out.println(user);
-        if (user != null) {
-            if (passwordEncoder.matches(authForm.getPassword(), user.getPasswordHash())) {
-                System.out.println("Вход выполнен!");
-                String cookieValue = UUID.randomUUID().toString();
-
-                Auth auth = new Auth();
-                auth.setUser(user);
-                auth.setCookieValue(cookieValue);
-                Auth auth1 = authRepository.save(auth);
-                System.out.println(auth1);
-                Cookie cookie = new Cookie("auth", cookieValue);
-                cookie.setMaxAge(10 * 60 * 60);
-                return cookie;
-            } else {
-                System.out.println("Вход не выполнен!");
-            }
-        }
-        return null;
-    }
 
     @Override
     public User findUserByCookieValue(String cookieValue) {
@@ -103,6 +76,11 @@ public class UserServiceImpl implements UserService {
             return cosmostarRepository.save(cosmostar);
         }
        return null;
+    }
+
+    @Override
+    public void setProfilePic(Long id, String fileName) {
+        usersRepository.setProfilePic(id, fileName);
     }
 
     public boolean emailDoesntExist(String email) {

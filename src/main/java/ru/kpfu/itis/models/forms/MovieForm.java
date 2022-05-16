@@ -18,10 +18,10 @@ public class MovieForm {
 
     private String description;
 
-    private String poster_link;
+    private String posterLink;
 
     private Director director;
 
-    private String age_restriction;
+    private String ageRestriction;
 
 }

@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public interface UserService {
     User register(UserForm userForm);
-    Cookie signIn(AuthForm authForm);
     User findUserByCookieValue(String cookieValue);
     Optional<Cosmostar> findCardByUser (User user);
     Cosmostar cardInit (User user);
+    void setProfilePic(Long id, String fileName);
     boolean emailDoesntExist(String email);
 }

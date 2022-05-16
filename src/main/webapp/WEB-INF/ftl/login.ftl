@@ -29,7 +29,7 @@
   <button>Войти</button>
 </form>
 
-<#if error??><p class="info-text" style="margin-top: 0">${signInStatus}</p></#if>
+<#--<#if error??><p class="info-text" style="margin-top: 0">${signInStatus}</p></#if>-->
 
 <footer>
   <b>Касса:</b>

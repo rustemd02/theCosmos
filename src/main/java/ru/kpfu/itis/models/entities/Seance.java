@@ -1,10 +1,13 @@
 package ru.kpfu.itis.models.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Getter
@@ -34,4 +37,5 @@ public class Seance {
 
     @Column(name = "price")
     private Integer price;
+
 }

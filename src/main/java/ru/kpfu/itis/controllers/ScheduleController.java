@@ -1,0 +1,111 @@
+package ru.kpfu.itis.controllers;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import ru.kpfu.itis.models.dtos.BuyTicketDto;
+import ru.kpfu.itis.models.dtos.SeanceDto;
+import ru.kpfu.itis.models.entities.Movie;
+import ru.kpfu.itis.models.entities.Seance;
+import ru.kpfu.itis.models.entities.User;
+import ru.kpfu.itis.services.MovieService;
+import ru.kpfu.itis.services.SeanceService;
+import ru.kpfu.itis.services.UserService;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+@Controller
+@RequestMapping(value = "/schedule")
+public class ScheduleController {
+
+    @Autowired
+    private SeanceService seanceService;
+
+    @GetMapping
+    public ModelAndView schedulePage(String redirect) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (redirect != null) {
+            modelAndView.setViewName("redirect:/" + redirect);
+            return modelAndView;
+        }
+        modelAndView.setViewName("schedule");
+        modelAndView.addObject("signIn", "Выйти");
+        modelAndView.addObject("profileLink", "/profile");
+        modelAndView.addObject("register", "Профиль");
+        modelAndView.addObject("signOutLink", "/logout");
+
+        List<Seance> seances = seanceService.findAll();
+        modelAndView.addObject("seances", seances);
+        return modelAndView;
+    }
+
+
+    @GetMapping(value = "/seance")
+    public ModelAndView seancePageGet(String redirect) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (redirect != null) {
+            modelAndView.setViewName("redirect:/" + redirect);
+            return modelAndView;
+        }
+        modelAndView.setViewName("seance");
+        modelAndView.addObject("signIn", "Выйти");
+        modelAndView.addObject("profileLink", "/profile");
+        modelAndView.addObject("register", "Профиль");
+        modelAndView.addObject("signOutLink", "/logout");
+
+        return modelAndView;
+    }
+
+    @Transactional
+    @PostMapping(value = "/seance")
+    public void seancePagePost(SeanceDto seanceDto, HttpServletResponse resp) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String seanceId = seanceDto.getSeanceId();
+
+        if (seanceId != null && !seanceId.equals("null")) {
+            Seance seance = seanceService.findById(Long.valueOf(seanceId)).get();
+            String json = objectMapper.writeValueAsString(seance);
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+
+            System.out.println("json " +json);
+
+            resp.getWriter().println(json);
+        }
+
+    }
+
+    @Transactional
+    @RequestMapping(method = RequestMethod.POST, value = "/seance/buy_ticket")
+    public ModelAndView buyTicket(Authentication authentication, BuyTicketDto buyTicketDto, HttpServletResponse response) throws IOException {
+        ModelAndView modelAndView = new ModelAndView();
+
+        String seanceId = buyTicketDto.getSeanceId();
+        Boolean useCosmostar = buyTicketDto.getUseCosmostar();
+
+        if (seanceId != null) {
+            User user = (User) authentication.getPrincipal();
+            Seance seance = seanceService.buyTicket(Long.valueOf(seanceId), user, useCosmostar);
+            if (seance != null) {
+                String json = "{}";
+                response.getWriter().println(json);
+            }
+        }
+
+        return modelAndView;
+    }
+
+
+}

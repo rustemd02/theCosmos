@@ -23,6 +23,7 @@ public class SeanceServiceImpl implements SeanceService {
     @Autowired
     private UserSeanceRepository userSeanceRepository;
 
+
     @Override
     public List<Seance> findAll() {
         return seanceRepository.findAll();
@@ -41,7 +42,7 @@ public class SeanceServiceImpl implements SeanceService {
             int cosmostarBalance = user.getCosmostar().getPoints();
             if (seancePrice < cosmostarBalance) {
                 user.getCosmostar().setPoints(cosmostarBalance - seancePrice);
-                insertIntoUserSeance(seanceId,user);
+                insertIntoUserSeance(seance.get(), user);
                 return seance.get();
             } else {
                 return null;
@@ -50,7 +51,7 @@ public class SeanceServiceImpl implements SeanceService {
             int userBalance = user.getBalance();
             if (seancePrice < userBalance) {
                 user.setBalance(userBalance - seancePrice);
-                insertIntoUserSeance(seanceId, user);
+                insertIntoUserSeance(seance.get(), user);
                 usersRepository.changeBalance(user.getId(), user.getBalance());
                 return seance.get();
             } else {
@@ -60,10 +61,11 @@ public class SeanceServiceImpl implements SeanceService {
 
     }
 
-    public void insertIntoUserSeance(Long seanceId, User user) {
+    public void insertIntoUserSeance(Seance seance, User user) {
         UserSeance userSeance = new UserSeance();
-        userSeance.setSeanceId(seanceId);
-        userSeance.setUserId(user.getId());
+
+        userSeance.setSeance(seance);
+        userSeance.setUser(user);
         userSeanceRepository.save(userSeance);
     }
 }

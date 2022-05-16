@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.kpfu.itis.models.entities.User;
 
 @Controller
+
 public class ChatController {
     @RequestMapping(method = RequestMethod.GET, value = "/movieChat")
     public ModelAndView cosmostarPage(Authentication authentication, String redirect) {
@@ -19,10 +20,7 @@ public class ChatController {
         User user = (User) authentication.getPrincipal();
         modelAndView.setViewName("movieChat");
         modelAndView.addObject("user", user);
-        modelAndView.addObject("signIn", "Выйти");
-        modelAndView.addObject("profileLink", "/profile");
-        modelAndView.addObject("register", "Профиль");
-        modelAndView.addObject("signOutLink", "/logout");
+
         return modelAndView;
     }
 }

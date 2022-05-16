@@ -32,8 +32,8 @@
 <div id="schedule">
     <table>
         <#list seances as seance>
-            <form class="menu-option" method="post" action="/movie">
-                <h3><button type="submit" name="seance" value="${seance.getId()}">${seance.movie.getTitle()}</button></h3>
+            <form class="menu-option" method="get" action="/schedule/seance?id=${seance.getId()}">
+                <h3><button class="schedule" type="submit" name="id" value="${seance.getId()}">${seance.movie.getTitle()}</button></h3>
             </form>
         </#list>
     </table>

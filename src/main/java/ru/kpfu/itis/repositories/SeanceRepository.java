@@ -16,6 +16,6 @@ public interface SeanceRepository extends JpaRepository<Seance, Long> {
 
     Optional<Seance> findById(Long seanceId);
 
-    @Query("select s from Seance s inner join UserSeance us on s.id = us.seanceId where us.userId = ?1")
+    @Query("select s from Seance s inner join UserSeance us on s.id = us.seance.id where us.user.id = ?1")
     Optional<Seance> findByUserId(Long userId);
 }

@@ -1,6 +1,8 @@
 package ru.kpfu.itis.models.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -15,14 +17,23 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_seance")
 public class UserSeance {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @OneToOne
+    @JoinTable(name = "users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "id"))
+    @Fetch(value = FetchMode.JOIN)
+    private User user;
 
-    @Column(name = "seance_id")
-    private Long seanceId;
+    @OneToOne
+    @JoinTable(name = "seance",
+            joinColumns = @JoinColumn(name = "seance_id"),
+            inverseJoinColumns = @JoinColumn(name = "id"))
+    @Fetch(value = FetchMode.JOIN)
+    private Seance seance;
 
 }

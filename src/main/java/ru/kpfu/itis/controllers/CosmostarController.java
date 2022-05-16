@@ -27,10 +27,7 @@ public class CosmostarController {
             return modelAndView;
         }
         modelAndView.setViewName("loyalty");
-        modelAndView.addObject("signIn", "Выйти");
-        modelAndView.addObject("profileLink", "/profile");
-        modelAndView.addObject("register", "Профиль");
-        modelAndView.addObject("signOutLink", "/logout");
+
         return modelAndView;
     }
 

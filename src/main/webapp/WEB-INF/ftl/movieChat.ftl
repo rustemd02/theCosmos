@@ -15,8 +15,8 @@
         <li style="float: left"><a href="/">Главная</a></li>
         <li style="float: left"><a href="/schedule">Афиша</a></li>
         <li style="align-content: center"><a href="/cosmostar">«Космостар»</a></li>
-        <li style="float: right"><a href="${signOutLink}">${signIn}</a></li>
-        <li style="float: right"><a href="${profileLink}">${register}</a></li>
+        <li style="float: right"><a href="/logout">Выйти</a></li>
+        <li style="float: right"><a href="/profile">Профиль</a></li>
         <li style="float: right" class="active"><a href="/movieChat">Чат</a></li>
 
     </div>

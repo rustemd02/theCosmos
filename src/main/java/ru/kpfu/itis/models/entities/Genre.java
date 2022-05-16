@@ -22,4 +22,7 @@ public class Genre {
 
     @Column(name = "genreName")
     private String genreName;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "genres")
+    private List<Movie> movies;
 }

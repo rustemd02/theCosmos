@@ -1,8 +1,12 @@
 package ru.kpfu.itis.models.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Getter
@@ -36,6 +40,6 @@ public class User {
     @Column(name = "balance")
     private Integer balance;
 
-
-
+    @Column(name = "profile_pic")
+    private String profilePic;
 }
