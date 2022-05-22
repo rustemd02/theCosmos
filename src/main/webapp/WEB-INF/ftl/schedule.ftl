@@ -29,15 +29,18 @@
 
 <h1 style="margin-left: 15px">Афиша на завтра</h1>
 
-<div id="schedule">
+<div class="schedule">
     <table>
         <#list seances as seance>
             <form class="menu-option" method="get" action="/schedule/seance?id=${seance.getId()}">
-                <h3><button class="schedule" type="submit" name="id" value="${seance.getId()}">${seance.movie.getTitle()}</button></h3>
+                <h3>
+                    <button class="buttons" type="submit" name="id" value="${seance.getId()}">${seance.movie.getTitle()}
+                        , ${seance.getPrice()}</button>
+                </h3>
             </form>
         </#list>
     </table>
-
+    <li class="allMovies"><a href="/movies">Все фильмы</a></li>
 </div>
 
 

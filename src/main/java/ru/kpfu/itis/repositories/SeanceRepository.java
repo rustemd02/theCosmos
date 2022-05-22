@@ -1,6 +1,7 @@
 package ru.kpfu.itis.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.kpfu.itis.models.entities.Seance;
@@ -12,10 +13,17 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface SeanceRepository extends JpaRepository<Seance, Long> {
+
     List<Seance> findAll();
 
     Optional<Seance> findById(Long seanceId);
 
-    @Query("select s from Seance s inner join UserSeance us on s.id = us.seance.id where us.user.id = ?1")
-    Optional<Seance> findByUserId(Long userId);
+    @Query("SELECT s from Seance s join fetch User u on s member of u.seances where u.id = ?1")
+    List<Seance> findSeancesByUserId(Long userId);
+
+    @Modifying
+    @Query("update Seance as s set s.ticketsAmount = ?2 where s.id = ?1")
+    void setTicketsAmount(Long seanceId, int newTicketsAmount);
+
+    List<Seance> findByMovieId(Long movieId);
 }

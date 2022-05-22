@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 function buyTicket(id) {
     $.ajax({
-        url: '/seance',
+        url: '/schedule/seance/buy_ticket',
         method: 'post',
         dataType: 'json',
         data: {
@@ -16,16 +16,16 @@ function buyTicket(id) {
             "useCosmostar": false
         },
         success: function () {
-            alert("Билет куплен")
+            alert("Билет куплен, приятного просмотра!")
         },
         error: function () {
-            alert("Ошибка")
+            alert("Недостаточно средств")
         }
     })
 }
 function buyTicketCosmostar(id) {
     $.ajax({
-        url: '/seance',
+        url: '/schedule/seance/buy_ticket',
         method: 'post',
         dataType: 'json',
         data: {
@@ -33,10 +33,11 @@ function buyTicketCosmostar(id) {
             "useCosmostar": true
         },
         success: function () {
-            alert("Билет куплен")
+            alert("Билет куплен, приятного просмотра!")
         },
         error: function () {
-            alert("Ошибка")
+
+            alert("Недостаточно средств")
         }
     })
 }
@@ -53,8 +54,11 @@ function sendSeanceId(id) {
         success: function (seance) {
             console.log(seance)
             document.getElementById("movieTitle").innerText = seance.movie.title
-            document.getElementById("buyTicketCosmostar").innerHTML = `<button id="buyTicketCosmostar" onclick="buyTicketCosmostar(`+ seance.id +`)">Купить билет за баллы Космостар</button>`
-            document.getElementById("buyTicket").innerHTML = `<button id="buyTicket" onclick="buyTicket(`+ seance.id +`)">Купить билет</button>`
+            document.getElementById("movieDescription").innerText = seance.movie.description
+            document.getElementById("buyTicketCosmostar").innerHTML = `<button id="buyTicketCosmostar" onclick="buyTicketCosmostar(` + seance.id + `)">Купить билет за баллы Космостар</button>`
+            document.getElementById("buyTicket").innerHTML = `<button id="buyTicket" onclick="buyTicket(` + seance.id + `)">Купить билет</button>`
+            document.getElementById("ticketsLeft").innerHTML = `<label>Осталось билетов: </label>`
+            document.getElementById("ticketsLeftAmount").innerText = seance.ticketsAmount
         }, error: function (data, exception) {
             console.log("data " +data)
             console.log("exception " +exception)

@@ -8,6 +8,12 @@ import java.util.Optional;
 
 public interface SeanceService {
     List<Seance> findAll();
+
     Optional<Seance> findById(Long id);
-    Seance buyTicket (Long seanceId, User user, Boolean useCosmostar);
+
+    Seance buyTicket(Long seanceId, User user, Boolean useCosmostar);
+
+    void seanceConfigure(List<Seance> seances);
+
+    List<Seance> findSeancesByUserId(Long userId);
 }

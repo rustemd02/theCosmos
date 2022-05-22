@@ -22,13 +22,15 @@
         <li style="float: right"><a href="/movieChat">Чат</a></li>
 
 
-
     </div>
 </header>
 
-<h1 style="margin-left: 15px" id="movieTitle">  </h1>
-<div id="buyTicketCosmostar"> </div>
-<div id="buyTicket"> </div>
+<h1 style="margin-left: 15px" id="movieTitle"></h1>
+<div id="movieDescription"></div>
+<div id="buyTicketCosmostar"></div>
+<div id="buyTicket"></div>
+<div id="ticketsLeft"></div>
+<div id="ticketsLeftAmount"></div>
 
 
 <footer>

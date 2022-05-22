@@ -1,9 +1,6 @@
 package ru.kpfu.itis.models.entities;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
+@ToString(exclude = "seances")
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,7 +22,6 @@ public class User {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "cosmostar_id")
     private Cosmostar cosmostar;
 
     @Column(name = "email")
@@ -42,4 +38,10 @@ public class User {
 
     @Column(name = "profile_pic")
     private String profilePic;
+
+    @ManyToMany
+    @JoinTable(name = "user_seance",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "seance_id"))
+    private List<Seance> seances;
 }

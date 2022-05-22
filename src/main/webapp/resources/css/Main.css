@@ -21,7 +21,7 @@
     color: crimson;
 }
 
-.buttons{
+.buttons {
     font-style: normal;
     list-style-type: none;
     margin: 0;
@@ -29,18 +29,35 @@
     overflow: hidden;
 }
 
-.buttons a{
+.buttons a {
     padding: 16px 16px;
 }
 
-.active{
+.active {
     background-color: crimson;
 }
+
 .buttons li {
     float: left;
 }
 
-.buttons li a{
+.allMovies a {
+    list-style-type: none;
+    display: block;
+    color: crimson;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color: #d0d5da;
+    font-weight: bold;
+}
+
+.allMovies {
+    list-style-type: none;
+    color: #d0d5da;
+}
+
+.buttons li a {
     display: block;
     color: white;
     text-align: center;
@@ -48,9 +65,10 @@
     text-decoration: none;
 }
 
-li a:hover {
+.site-header li a:hover {
     background-color: crimson;
 }
+
 
 .cinema {
     width: 500px;
@@ -70,10 +88,12 @@ body {
 .promo {
     border: solid crimson;
 }
-.promo h2{
+
+.promo h2 {
     padding-left: 30px;
     font-size: 35px;
 }
+
 .cards {
     display: block;
     margin-left: auto;
@@ -90,7 +110,7 @@ body {
 
 }
 
-.photosText{
+.photosText {
     text-align: center;
     padding: 10px 20px;
 }
@@ -112,24 +132,25 @@ footer {
     height: auto;
 }
 
-.f-text a{
+.f-text a {
     text-decoration: none;
     color: inherit;
 }
 
 .schedule button {
     display: block;
-    color: white;
+    color: crimson;
     text-align: center;
     padding: 14px 16px;
+    font-weight: bold;
     text-decoration: none;
 }
 
-.schedule table{
+.schedule table {
     font-size: 20px;
 }
 
-.schedule img{
+.schedule img {
     margin: 10px;
     width: 20%;
 }
@@ -143,6 +164,7 @@ fieldset {
     font-size: 21px;
     margin-bottom: 10px;
 }
+
 fieldset button {
     font-size: 15px;
     font-family: "Times New Roman", serif;

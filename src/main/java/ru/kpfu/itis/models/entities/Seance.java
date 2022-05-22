@@ -1,22 +1,18 @@
 package ru.kpfu.itis.models.entities;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
 
-@Data
+
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
+@ToString(exclude = "users")
 @Entity
 @Table(name = "seance")
 public class Seance {
@@ -38,4 +34,9 @@ public class Seance {
     @Column(name = "price")
     private Integer price;
 
+//    @ManyToMany
+//    @JoinTable(name = "user_seance",
+//            joinColumns = @JoinColumn(name = "seance_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private List<User> users;
 }

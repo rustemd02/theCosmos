@@ -44,22 +44,19 @@ public class Movie {
     private String description;
 
     @Column(name = "poster_link")
-    private String poster_link;
+    private String posterLink;
 
     @ManyToOne
     @JoinColumn(name = "director")
     private Director director;
 
     @Column(name = "age_restriction")
-    private String age_restriction;
+    private String ageRestriction;
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Seance> seances;
 
-    @ManyToMany
-    @JoinTable(name = "movie_genre",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    @ManyToOne
     @Fetch(value = FetchMode.JOIN)
-    private List<Genre> genres;
+    private Genre genre;
 }

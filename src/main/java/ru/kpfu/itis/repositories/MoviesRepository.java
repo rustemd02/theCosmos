@@ -17,4 +17,8 @@ public interface MoviesRepository extends JpaRepository<Movie, Long> {
 
     @Query("SELECT m from Movie m inner join Seance s on m.id = s.movie.id where s.id = ?1")
     Optional<Movie> findMovieBySeanceId(Long seanceId);
+
+    List<Movie> findMoviesByDirectorId(Long directorId);
+
+    List<Movie> findMoviesByGenreId(Long genreId);
 }

@@ -4,7 +4,7 @@
     <title>Профиль</title>
     <link rel="stylesheet" href="../../resources/css/Main.css">
 </head>
-<body onload="loadProfilePic('${(user.profilePic)!""}')">
+<body>
 
 <header class="site-header">
     <a href="/">
@@ -21,14 +21,14 @@
     </div>
 </header>
 
-<div id="userId" hidden>${userId}</div>
+<div id="userId" hidden>${user.id}</div>
 
 <h1>Добро пожаловать, ${name} </h1>
 
 <div style="width: 100%; margin: auto; text-align: center;">
-    <img src="/resources/Assets/defaultProfilePic.jpeg" id="profilePic" alt="" style="width: 15%">
-    <form id="file-upload-form" enctype="multipart/form-data" method="post">
-        <input type="file" id="profilePicFile" title="Выбрать файл для аватарки" style="width: 30%">
+    <img src="${user.profilePic!"/resources/Assets/defaultProfilePic.jpeg"}" id="profilePic" alt="" style="width: 15%">
+    <form action="/profile/set_pic" id="file-upload-form" enctype="multipart/form-data" method="post">
+        <input type="file" id="profilePic" name="profilePic" title="Выбрать файл для аватарки" style="width: 30%">
         <button type="submit">Сохранить</button>
     </form>
 </div>
@@ -37,6 +37,15 @@
 <h3>${cosmostarBalance}</h3>
 
 <h3>Баланс Вашей карты MasterCard-4151: ${cardBalance}</h3>
+
+<table>
+    <h3>Ваши сеансы: </h3>
+    <#list seances as seance>
+        <form class="menu-option" method="get" action="/profile/get_user_seance?id=${seance.getId()}">
+            <h3> ${seance.movie.getTitle()}</h3>
+        </form>
+    </#list>
+</table>
 
 
 <footer>
@@ -51,6 +60,6 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="../../resources/javascript/profile.js"></script>
+
 </body>
 </html>

@@ -23,4 +23,6 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
         registry.addHandler(messageWebSocketHandler, "/chat")
                 .setHandshakeHandler(authHandshakeHandler);
     }
+
+
 }

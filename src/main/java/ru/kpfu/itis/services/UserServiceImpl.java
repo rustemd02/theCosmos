@@ -1,22 +1,24 @@
 package ru.kpfu.itis.services;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import ru.kpfu.itis.models.entities.Auth;
 import ru.kpfu.itis.models.entities.Cosmostar;
 import ru.kpfu.itis.models.entities.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.kpfu.itis.models.forms.AuthForm;
 import ru.kpfu.itis.models.forms.UserForm;
 import ru.kpfu.itis.repositories.AuthRepository;
 import ru.kpfu.itis.repositories.CosmostarRepository;
 import ru.kpfu.itis.repositories.UsersRepository;
 
-import javax.servlet.http.Cookie;
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,12 +28,16 @@ public class UserServiceImpl implements UserService {
     private AuthRepository authRepository;
     @Autowired
     private CosmostarRepository cosmostarRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+    @Value("${sender.email}")
+    private String senderEmail;
+
+    @Value("${sender.password}")
+    private String senderPassword;
 
 
     @Override
-    public User register(UserForm userForm) {
+    public User register(UserForm userForm) throws MessagingException, UnsupportedEncodingException, EmailException {
         User user = new User();
         user.setName(userForm.getName());
         user.setEmail(userForm.getEmail());
@@ -41,6 +47,21 @@ public class UserServiceImpl implements UserService {
         String passwordHash = new BCryptPasswordEncoder().encode(userForm.getPassword());
 
         user.setPasswordHash(passwordHash);
+
+        Email emailMessage = new SimpleEmail();
+
+        emailMessage.setSmtpPort(587);
+        emailMessage.setAuthenticator(new DefaultAuthenticator(senderEmail, senderPassword));
+        emailMessage.setHostName("smtp.gmail.com");
+        emailMessage.setSSLOnConnect(true);
+
+        emailMessage.setFrom(senderEmail);
+        emailMessage.setSubject("Регистрация");
+
+        emailMessage.setMsg(user.getName() + ", поздравляем с успешной регистрацией на сайте Космоса!");
+
+        emailMessage.addTo(user.getEmail());
+        emailMessage.send();
 
         return usersRepository.save(user);
     }
@@ -73,7 +94,8 @@ public class UserServiceImpl implements UserService {
             Cosmostar cosmostar = new Cosmostar();
             cosmostar.setUser(user);
             cosmostar.setPoints(300);
-            return cosmostarRepository.save(cosmostar);
+            cosmostarRepository.save(cosmostar);
+            return cosmostar;
         }
        return null;
     }
