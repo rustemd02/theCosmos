@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
         Email emailMessage = new SimpleEmail();
 
-        emailMessage.setSmtpPort(587);
+        emailMessage.setSmtpPort(465);
         emailMessage.setAuthenticator(new DefaultAuthenticator(senderEmail, senderPassword));
         emailMessage.setHostName("smtp.gmail.com");
         emailMessage.setSSLOnConnect(true);
