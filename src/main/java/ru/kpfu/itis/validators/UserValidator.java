@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import ru.kpfu.itis.models.dtos.SignUpDto;
-import ru.kpfu.itis.services.UserService;
+import ru.kpfu.itis.services.interfaces.UserService;
 
 import java.util.regex.Pattern;
 

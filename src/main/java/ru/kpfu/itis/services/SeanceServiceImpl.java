@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.models.entities.*;
 import ru.kpfu.itis.repositories.*;
+import ru.kpfu.itis.services.interfaces.SeanceService;
 
 import java.util.List;
 import java.util.Optional;
@@ -99,6 +100,10 @@ public class SeanceServiceImpl implements SeanceService {
                 user.setBalance(userBalance - seancePrice);
                 insertIntoUserSeance(seance.get(), user);
                 usersRepository.changeBalance(user.getId(), user.getBalance());
+                if (cosmostarRepository.findCosmostarByUserId(user.getId()).isPresent()) {
+                    Cosmostar cosmostar = cosmostarRepository.findCosmostarByUserId(user.getId()).get();
+                    cosmostarRepository.updatePoints(cosmostar.getId(), (int) (cosmostar.getPoints() + (seancePrice * 0.1)));
+                }
                 seanceRepository.setTicketsAmount(seanceId, seance.get().getTicketsAmount() - 1);
                 return seance.get();
             } else {

@@ -1,4 +1,4 @@
-package ru.kpfu.itis.services;
+package ru.kpfu.itis.services.interfaces;
 
 
 import org.apache.commons.mail.EmailException;

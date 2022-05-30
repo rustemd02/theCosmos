@@ -1,4 +1,4 @@
-package ru.kpfu.itis.services;
+package ru.kpfu.itis.services.interfaces;
 
 import ru.kpfu.itis.models.dtos.MovieDto;
 import ru.kpfu.itis.models.entities.Movie;

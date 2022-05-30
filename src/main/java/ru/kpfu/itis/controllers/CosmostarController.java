@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kpfu.itis.models.entities.Cosmostar;
 import ru.kpfu.itis.models.entities.User;
-import ru.kpfu.itis.services.CosmostarService;
-import ru.kpfu.itis.services.UserService;
+import ru.kpfu.itis.services.interfaces.CosmostarService;
+import ru.kpfu.itis.services.interfaces.UserService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

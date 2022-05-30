@@ -10,7 +10,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import ru.kpfu.itis.models.dtos.MessageDto;
 import ru.kpfu.itis.models.entities.User;
-import ru.kpfu.itis.services.UserService;
+import ru.kpfu.itis.services.interfaces.UserService;
 
 
 import java.util.Map;

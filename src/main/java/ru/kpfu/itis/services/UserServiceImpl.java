@@ -15,6 +15,7 @@ import ru.kpfu.itis.models.forms.UserForm;
 import ru.kpfu.itis.repositories.AuthRepository;
 import ru.kpfu.itis.repositories.CosmostarRepository;
 import ru.kpfu.itis.repositories.UsersRepository;
+import ru.kpfu.itis.services.interfaces.UserService;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;

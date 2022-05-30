@@ -14,7 +14,7 @@ import ru.kpfu.itis.models.dtos.BuyTicketDto;
 import ru.kpfu.itis.models.dtos.SeanceDto;
 import ru.kpfu.itis.models.entities.Seance;
 import ru.kpfu.itis.models.entities.User;
-import ru.kpfu.itis.services.SeanceService;
+import ru.kpfu.itis.services.interfaces.SeanceService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -83,8 +83,6 @@ public class ScheduleController {
             String json = objectMapper.writeValueAsString(seance);
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
-
-            System.out.println("json " +json);
 
             resp.getWriter().println(json);
         }

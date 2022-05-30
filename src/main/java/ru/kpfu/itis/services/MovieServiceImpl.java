@@ -1,7 +1,10 @@
 package ru.kpfu.itis.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kpfu.itis.controllers.UsersController;
 import ru.kpfu.itis.models.dtos.MovieDto;
 import ru.kpfu.itis.models.entities.Director;
 import ru.kpfu.itis.models.entities.Genre;
@@ -10,6 +13,7 @@ import ru.kpfu.itis.repositories.DirectorRepository;
 import ru.kpfu.itis.repositories.GenreRepository;
 import ru.kpfu.itis.repositories.MoviesRepository;
 import ru.kpfu.itis.repositories.SeanceRepository;
+import ru.kpfu.itis.services.interfaces.MovieService;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +32,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private SeanceRepository seanceRepository;
+
+    private final Logger logger = LoggerFactory.getLogger(MovieServiceImpl.class);
+
 
 
     @Override
@@ -78,6 +85,7 @@ public class MovieServiceImpl implements MovieService {
                 .director(director)
                 .genre(genre)
                 .build();
+        logger.info("Фильм добавлен");
         return moviesRepository.save(movie);
     }
 
@@ -85,6 +93,7 @@ public class MovieServiceImpl implements MovieService {
     public void deleteMovie(Long movieId) {
         Movie movie = moviesRepository.getById(movieId);
         moviesRepository.delete(movie);
+        logger.info("Фильм удалён");
     }
 
     @Override
@@ -104,7 +113,7 @@ public class MovieServiceImpl implements MovieService {
         movie.setGenre(genre);
 
         movie.setAgeRestriction(movieDto.getAgeRestriction());
-
+        logger.info("Фильм изменён");
         return moviesRepository.save(movie);
     }
 

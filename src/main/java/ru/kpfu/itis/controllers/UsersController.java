@@ -16,9 +16,9 @@ import ru.kpfu.itis.models.dtos.SignUpDto;
 import ru.kpfu.itis.models.entities.Seance;
 import ru.kpfu.itis.models.entities.User;
 import ru.kpfu.itis.models.forms.UserForm;
-import ru.kpfu.itis.services.CosmostarService;
-import ru.kpfu.itis.services.SeanceService;
-import ru.kpfu.itis.services.UserService;
+import ru.kpfu.itis.services.interfaces.CosmostarService;
+import ru.kpfu.itis.services.interfaces.SeanceService;
+import ru.kpfu.itis.services.interfaces.UserService;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
@@ -90,7 +90,8 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/register")
-    public ModelAndView signUp(SignUpDto signUpDto, HttpServletResponse response) throws MessagingException, UnsupportedEncodingException, EmailException {
+    public ModelAndView signUp(SignUpDto signUpDto, HttpServletResponse response)
+            throws MessagingException, UnsupportedEncodingException, EmailException {
 
         ModelAndView modelAndView = new ModelAndView();
         System.out.println(signUpDto.toString());
@@ -142,6 +143,7 @@ public class UsersController {
             modelAndView.setViewName("redirect:/" + redirect);
             return modelAndView;
         }
+        logger.info("Зашли в профиль");
         User user = (User) authentication.getPrincipal();
         modelAndView.setViewName("profile");
         List<Seance> seances = seanceService.findSeancesByUserId(user.getId());
